@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 import helloRouter from './HelloRoutes'
 import { LogInfo } from '../utils/logger'
+import GoodByeRoutes from './GoodByeRoutes'
 
 let app = express()
 let rootRouter = express.Router()
@@ -13,5 +14,6 @@ rootRouter.get('/', (req: Request, res: Response) => {
 
 app.use('/', rootRouter); // http://localhost:8000/api/
 app.use('/hello', helloRouter); // http://localhost:8000/api/hello --> HelloRouter
+app.use('/goodbye', GoodByeRoutes); // http://localhost:8000/api/hello --> HelloRouter
 
 export default app
