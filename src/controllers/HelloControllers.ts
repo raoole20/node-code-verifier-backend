@@ -1,6 +1,6 @@
 import { BasicResponse } from "./types";
 import { IHelloController } from "./interfaces";
-import * as utils from "@/utils/logger";
+import * as utils from "../utils/logger";
 
 export class HelloController implements IHelloController {
 

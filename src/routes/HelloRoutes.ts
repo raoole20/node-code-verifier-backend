@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-import { HelloController } from "@/controllers/HelloControllers";
-import { LogInfo } from "@/utils/logger";
-import { BasicResponse } from "@/controllers/types";
+import { HelloController } from "../controllers/HelloControllers";
+import { LogInfo } from "../utils/logger";
+import { BasicResponse } from "../controllers/types";
 
 let helloRouter = express.Router()
 

@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express'
 import helloRouter from './HelloRoutes'
 import { LogInfo } from '../utils/logger'
 
-let server = express()
+let app = express()
 let rootRouter = express.Router()
 
 rootRouter.get('/', (req: Request, res: Response) => {
@@ -11,7 +11,7 @@ rootRouter.get('/', (req: Request, res: Response) => {
 })
 
 
-server.use('/', rootRouter); // http://localhost:8000/api/
-server.use('/hello', helloRouter); // http://localhost:8000/api/hello --> HelloRouter
+app.use('/', rootRouter); // http://localhost:8000/api/
+app.use('/hello', helloRouter); // http://localhost:8000/api/hello --> HelloRouter
 
-export default server
+export default app
