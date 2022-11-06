@@ -6,10 +6,6 @@ dotenv.config()
 const app: Express = express()
 const PORT: number | string = process.env.PORT || 8000
 
-app.get('/', (req: Request, res:Response) => {
-    res.send('Wlcome to my api restfull funtionando')
-})
-
 app.get('/hello', (req: Request, res:Response) => {
     res.send('funcionando')
 })
