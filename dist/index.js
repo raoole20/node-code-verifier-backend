@@ -14,6 +14,13 @@ app.get('/', (req, res) => {
 app.get('/hello', (req, res) => {
     res.send('funcionando');
 });
+app.get('/newPoint', (req, res) => {
+    res.json({
+        "data": {
+            "message": "GoodBye, world"
+        }
+    });
+});
 app.listen(PORT, () => {
     console.log('SERVER RUNNING');
 });

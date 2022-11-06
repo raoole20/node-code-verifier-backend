@@ -14,6 +14,14 @@ app.get('/hello', (req: Request, res:Response) => {
     res.send('funcionando')
 })
 
+app.get('/newPoint', (req: Request, res:Response) => {
+    res.json({
+        "data": {
+            "message": "GoodBye, world"
+        }
+    })
+})
+
 app.listen(PORT, ()=>{
     console.log('SERVER RUNNING')
 })
