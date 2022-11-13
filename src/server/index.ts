@@ -6,6 +6,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 
 // TODO https
+// TODO mongo connection
 
 // Root Router
 import routes from '../routes'
@@ -15,9 +16,8 @@ const server: Express = express()
 // Define Server to use /api and use rootRouter from index.ts in rootes
 server.use('/api/', routes)
 
-
-// TODO mongoose connection
-
+// Static Server
+server.use( express.static('public') )
 server.use(helmet())
 server.use(cors())
 
