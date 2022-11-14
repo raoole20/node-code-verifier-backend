@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "swagger": "tsoa spec",
-    "start": "node dist/index.js", 
+    "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \" npm run swagger \" \"nodemon -q dist/index.js\" ",
     "build": "npx webpack --mode development",
     "build:prod": "npx webpack --mode production",
@@ -27,6 +27,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.0",
+    "mongoose": "^6.7.2",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.6.0",
     "tsoa": "^4.1.3"
