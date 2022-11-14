@@ -11,5 +11,12 @@
         "sourceType": "module"
     },
     "rules": {
+        "semi": ["error", "never"],
+        "quotes": ["error", "double"],
+        "linebreak-style": [
+            "error", 
+            "windows"
+        ], 
+        "no-param-reassign": ["error", { "porps": false }]
     }
 }
