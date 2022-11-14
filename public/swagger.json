@@ -34,7 +34,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/api/hello": {
+		"/api/hello?name": {
 			"get": {
 				"operationId": "GetMessage",
 				"responses": {
@@ -57,6 +57,39 @@
 				"parameters": [
 					{
 						"description": "Name of user to be greeted",
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/goodbye": {
+			"get": {
+				"operationId": "GetMessage",
+				"responses": {
+					"200": {
+						"description": "Promise of BasicResponse",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "EndPoint to reatreive a Message \"GoobBye {name} in Json\"",
+				"tags": [
+					"GoodByeController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "Name include in querya params",
 						"in": "query",
 						"name": "name",
 						"required": false,

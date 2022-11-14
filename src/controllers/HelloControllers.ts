@@ -3,7 +3,7 @@ import { BasicResponse } from "./types";
 import { IHelloController } from "./interfaces";
 import * as utils from "../utils/logger";
 
-@Route("/api/hello")
+@Route("/api/hello?name")
 @Tags("HelloController")
 export class HelloController implements IHelloController {
 

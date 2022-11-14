@@ -4,10 +4,10 @@ import helmet from 'helmet'
 import swaggerUI from 'swagger-ui-express'
 
 // TODO https
-// TODO mongo connection
 
 // Root Router
 import routes from '../routes'
+import mongoose from "mongoose"
 
 const server: Express = express()
 
@@ -21,6 +21,8 @@ server.use('/docs', swaggerUI.serve, swaggerUI.setup(undefined, {
 
 // Define Server to use /api and use rootRouter from index.ts in rootes
 server.use('/api/', routes)
+
+mongoose.connect('mongodb://localhost:27017/CodeVerification')
 
 // Static Server
 server.use( express.static('public') )
