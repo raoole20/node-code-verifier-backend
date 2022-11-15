@@ -28,5 +28,13 @@ export const getUserById = async (id: String): Promise<any> =>{
 // TODO 
 // get user by email
 // delete user
+export const deleteUserById = async (id: String): Promise<any> => {
+    try {
+        const userModel = userEntity()
+        return await userModel.deleteOne({_id: id})
+    } catch (error) {
+        LogError(`[ORM ERROR] Delete user by ID ${error}`)
+    }
+}
 // create user
 // update user by id
