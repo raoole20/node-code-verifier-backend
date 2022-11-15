@@ -16,7 +16,6 @@ usersRouter.route('/')
     })
     //Delete:
     .delete(async (req: Request, res: Response) => {
-        
         const id:any = req?.query?.id
         LogInfo(`Query Param: ${id}`)
 

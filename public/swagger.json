@@ -105,7 +105,7 @@
 				"operationId": "GetUser",
 				"responses": {
 					"200": {
-						"description": "all Users",
+						"description": "JSON info user",
 						"content": {
 							"application/json": {
 								"schema": {}
@@ -113,12 +113,51 @@
 						}
 					}
 				},
-				"description": "EndPoint to retreive the users list in databases",
+				"description": "Get all user || Get user by id",
 				"tags": [
 					"UserControllers"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"description": "optional id for search user by id",
+						"in": "query",
+						"name": "id",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Delete user by id",
+				"tags": [
+					"UserControllers"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "user id",
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},
