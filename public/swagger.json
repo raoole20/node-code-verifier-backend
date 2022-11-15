@@ -130,6 +130,36 @@
 					}
 				]
 			},
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Create a new User",
+				"tags": [
+					"UserControllers"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "datos del usuario",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"description": "datos del usuario"
+							}
+						}
+					}
+				}
+			},
 			"delete": {
 				"operationId": "DeleteUser",
 				"responses": {

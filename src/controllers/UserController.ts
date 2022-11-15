@@ -1,9 +1,9 @@
-import { Delete, Get, Query, Route, Tags } from "tsoa"
+import { Body, Delete, Get, Post, Query, Route, Tags } from "tsoa"
 import { IUserController } from "./interfaces"
 
 // ORM - Users Collection
-import { deleteUserById, getAllUser, getUserById } from "../domain/orm/User.orm"
-import { LogSuccess, LogWarning } from "../utils/logger"
+import { createNewUser, deleteUserById, getAllUser, getUserById } from "../domain/orm/User.orm"
+import { LogError, LogSuccess, LogWarning } from "../utils/logger"
 import { BasicResponse } from "./types"
 
 @Route("api/users")
@@ -28,6 +28,26 @@ export class UserController implements IUserController {
             const response = await getAllUser()
             return response
         }
+    }
+
+    /**
+     * Create a new User
+     * @param user datos del usuario
+     * @return new user
+     */
+    @Post('/')
+    public async createUser(@Body()user: any): Promise<any> {
+        let response:any
+        await createNewUser(user).then( r => {
+            LogSuccess("[/api/user] Create user")
+            response = {
+                message: `User create successfully: id: ${r?.id}, name: ${r?.name} `
+            }
+        }).catch( err => {
+            LogError(`[/api/user] ERROR create user ${err} `)
+        })
+
+        return response
     }
 
     /**

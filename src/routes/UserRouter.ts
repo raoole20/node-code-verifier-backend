@@ -14,6 +14,15 @@ usersRouter.route('/')
 
         return res.send(response)
     })
+    // Create: 
+    .post(async (req: Request, res: Response) =>{
+        console.log( req.body )
+        const controller:UserController = new UserController()
+
+        const user = {}
+        const response:any = await controller.createUser(user)
+        return res.json(response)
+    })
     //Delete:
     .delete(async (req: Request, res: Response) => {
         const id:any = req?.query?.id

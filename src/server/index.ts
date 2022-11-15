@@ -36,7 +36,7 @@ server.use(express.urlencoded({
     limit: '50mb'
 }))
 
-server.use( express.json({ limit: '50mb'}) )
+server.use( express.json() )
 
 // redirecciones
 server.get('/', (req:Request, res: Response) => {
