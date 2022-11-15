@@ -40,4 +40,5 @@ kataRouter.delete('/', async (req:Request, res:Response) => {
 
     res.json(response)
 })
+
 export default kataRouter
