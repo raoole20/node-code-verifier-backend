@@ -1,8 +1,8 @@
-import { Get, Route, Tags } from "tsoa"
+import { Get, Query, Route, Tags } from "tsoa"
 import { IUserController } from "./interfaces"
 
 // ORM - Users Collection
-import { getAllUser } from "../domain/orm/User.orm"
+import { getAllUser, getUserById } from "../domain/orm/User.orm"
 import { LogSuccess } from "../utils/logger"
 import { BasicResponse } from "./types"
 
@@ -11,13 +11,22 @@ import { BasicResponse } from "./types"
 export class UserController implements IUserController{
 
     /**
-     * EndPoint to retreive the users list in databases
-     * @returns  all Users 
+     * Get all user || Get user by id
+     * @param id optional id for search user by id
+     * @returns { userResponse } JSON info user
      */
-    async getUser(): Promise<any> {
-        LogSuccess('[/api/users] Get all users Request')
+    @Get('/')
+    async getUser(@Query()id?:string): Promise<any> {
 
-        const response = await getAllUser()
-        return response
+        if(id){
+            LogSuccess('[/api/users?id] Get user by id ' + id)
+
+            return await getUserById(id)
+        }else{     
+            LogSuccess('[/api/users] Get all users Request')
+    
+            const response = await getAllUser()
+            return response
+        }
     }
 }

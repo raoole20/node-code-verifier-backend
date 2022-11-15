@@ -16,8 +16,16 @@ export const getAllUser = async () : Promise<any[] | undefined> =>  {
     }
 }
 
+export const getUserById = async (id: String): Promise<any> =>{
+    try {
+        const userModel = userEntity()
+        return await userModel.findById(id)
+    } catch (error) {
+        LogError(`[ORM ERROR] Get user by ID ${error}`)
+    }
+}
+
 // TODO 
-// Get user by Id
 // get user by email
 // delete user
 // create user

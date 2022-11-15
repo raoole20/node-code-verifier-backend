@@ -6,11 +6,12 @@ let usersRouter = express.Router()
 usersRouter.route('/')
     //Get:
     .get(async (req: Request, res: Response) => {
+        const id:any = req?.query?.id
         const controllers: UserController = new UserController()
-        const response: any = await controllers.getUser()
+
+        const response: any = await controllers.getUser(id)
 
         return res.send(response)
     })
-
 
 export default usersRouter

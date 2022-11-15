@@ -99,6 +99,27 @@
 					}
 				]
 			}
+		},
+		"/api/users": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "all Users",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "EndPoint to retreive the users list in databases",
+				"tags": [
+					"UserControllers"
+				],
+				"security": [],
+				"parameters": []
+			}
 		}
 	},
 	"servers": [
