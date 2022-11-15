@@ -12,7 +12,7 @@ rootRouter.get('/', (req: Request, res: Response) => {
     res.send('Welcome to my api restfull')
 })
 
-
+app.use( express.json() )
 app.use('/', rootRouter);                   // http://localhost:8000/api/
 app.use('/hello', helloRouter);             // http://localhost:8000/api/hello --> HelloRouter
 app.use('/goodbye', GoodByeRoutes);         // http://localhost:8000/api/hello --> HelloRouter

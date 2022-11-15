@@ -16,11 +16,24 @@ usersRouter.route('/')
     })
     // Create: 
     .post(async (req: Request, res: Response) =>{
-        console.log( req.body )
+        
         const controller:UserController = new UserController()
 
-        const user = {}
+        const user = { 
+            name: req?.body?.name ,
+            email: req?.body?.email,
+            age: req?.body?.age
+        }
+
         const response:any = await controller.createUser(user)
+        return res.json(response)
+    })
+    // Update
+    .put(async (req: Request, res: Response) => {
+        const { id, updateData} = req?.body
+
+        const controller: UserController = new UserController()
+        const response: any = await controller.updateUse(id, updateData)
         return res.json(response)
     })
     //Delete:

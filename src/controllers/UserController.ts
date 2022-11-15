@@ -1,8 +1,8 @@
-import { Body, Delete, Get, Post, Query, Route, Tags } from "tsoa"
+import { Body, Delete, Get, Post, Put, Query, Route, Tags } from "tsoa"
 import { IUserController } from "./interfaces"
 
 // ORM - Users Collection
-import { createNewUser, deleteUserById, getAllUser, getUserById } from "../domain/orm/User.orm"
+import { createNewUser, deleteUserById, getAllUser, getUserById, updateUserById } from "../domain/orm/User.orm"
 import { LogError, LogSuccess, LogWarning } from "../utils/logger"
 import { BasicResponse } from "./types"
 
@@ -36,16 +36,47 @@ export class UserController implements IUserController {
      * @return new user
      */
     @Post('/')
-    public async createUser(@Body()user: any): Promise<any> {
-        let response:any
-        await createNewUser(user).then( r => {
+    public async createUser(@Body() user: any): Promise<any> {
+        let response: any
+
+        await createNewUser(user).then(r => {
             LogSuccess("[/api/user] Create user")
+            LogSuccess(`[/api/user] the response is ${r} `)
             response = {
-                message: `User create successfully: id: ${r?.id}, name: ${r?.name} `
+                message: `User create successfully: id: ${r?.id}, name: ${r?.name} `,
+                user: r
             }
-        }).catch( err => {
+        }).catch(err => {
             LogError(`[/api/user] ERROR create user ${err} `)
         })
+
+        return response
+    }
+
+    /**
+     * Actualizar usuario por ID
+     * @param userID Id del usuario
+     * @param userData informacion del usuario que se desea actualizar
+     * @returns { userUpdateResponse }
+     */
+    @Put('/')
+    public async updateUse(@Body() userID: string, @Body() userData: any): Promise<any> {
+        let response: any
+
+        if (userID) {
+            LogSuccess(`[/api/user] Update User By ID: ${userID}`)
+            await updateUserById(userID, userData).then(r => {
+                response = {
+                    message: `Update Successfully id: ${userID}`,
+                    infoUpdate: r
+                }
+            })
+        } else {
+            LogWarning(`[/api/user] Update user need ID`)
+            response = {
+                message: "Pleas Provide an ID to update from databases"
+            }
+        }
 
         return response
     }

@@ -25,7 +25,6 @@ export const getUserById = async (id: String): Promise<any> =>{
     }
 }
 
-// TODO 
 // get user by email
 
 // delete user
@@ -47,4 +46,13 @@ export const createNewUser = async ( user: any) : Promise<any | undefined> =>{
         LogError(`[ORM ERROR]: Create User: ${error}`)
     }
 }
+
 // update user by id
+export const updateUserById = async (id: string, userData: any) : Promise<any>=> {
+    try {
+        const userModel = userEntity()
+        return await userModel.updateOne({_id: id}, userData)
+    } catch (error) {
+        LogError(`[ORM ERROR]: Update User: ${error}`)
+    }
+}
