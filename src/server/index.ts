@@ -22,7 +22,7 @@ server.use('/docs', swaggerUI.serve, swaggerUI.setup(undefined, {
 // Define Server to use /api and use rootRouter from index.ts in rootes
 server.use('/api/', routes)
 
-mongoose.connect('mongodb://localhost:27017/CodeVerification')
+mongoose.connect('mongodb://localhost:3000/CodeVerification')
 
 // Static Server
 server.use( express.static('public') )
