@@ -1,6 +1,25 @@
-import { LogError } from "@/utils/logger";
+import { LogError } from "../../utils/logger";
 import { kataEntity } from "../entities/Katas.entity";
 
+
+// Get 
+export const getAllKata = async () :Promise<any> => {
+    try{
+        const katas = kataEntity()
+        return await katas.find()
+    }catch(error){
+        LogError(`[ORM ERROR] Get all Katas error: ${error}`)
+    }
+}
+
+export const getKataById = async (id: string) :Promise<any> => {
+    try{
+        const katas = kataEntity()
+        return await katas.findById(id)
+    }catch(error){
+        LogError(`[ORM ERROR] Get Katas by id error: ${error}`)
+    }
+}
 
 // Create
 export const createKatas = async (datos:any): Promise<any> => {
