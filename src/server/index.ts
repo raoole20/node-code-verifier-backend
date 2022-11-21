@@ -43,4 +43,4 @@ server.get('/', (req:Request, res: Response) => {
     res.redirect('/api')
 })
 
-export default server
+export default server 

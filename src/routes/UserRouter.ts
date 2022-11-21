@@ -12,7 +12,7 @@ usersRouter.route('/')
 
         const response: any = await controllers.getUser(id)
 
-        return res.send(response)
+        return res.status(202).send(response)
     })
     // Create: 
     .post(async (req: Request, res: Response) =>{
@@ -26,25 +26,26 @@ usersRouter.route('/')
         }
 
         const response:any = await controller.createUser(user)
-        return res.json(response)
+        return res.status(201).json(response)
     })
     // Update
     .put(async (req: Request, res: Response) => {
-        const { id, updateData} = req?.body
+        const { updateData} = req?.body
+        const id:any = req?.query?.id
 
         const controller: UserController = new UserController()
         const response: any = await controller.updateUse(id, updateData)
-        return res.json(response)
+        return res.status(response.status).json(response)
     })
     //Delete:
     .delete(async (req: Request, res: Response) => {
-        const id:any = req?.query?.id
+        const id: string | any = req?.query?.id
         LogInfo(`Query Param: ${id}`)
 
         const controllers: UserController = new UserController()
         const response: any = await controllers.deleteUser(id)
 
-        return res.send(response)
+    return res.status(response.status).send(response)
     })
 
 export default usersRouter

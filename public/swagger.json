@@ -160,6 +160,46 @@
 					}
 				}
 			},
+			"put": {
+				"operationId": "UpdateUse",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Actualizar usuario por ID",
+				"tags": [
+					"UserControllers"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "Id del usuario",
+						"in": "query",
+						"name": "userID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "informacion del usuario que se desea actualizar",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"description": "informacion del usuario que se desea actualizar"
+							}
+						}
+					}
+				}
+			},
 			"delete": {
 				"operationId": "DeleteUser",
 				"responses": {
@@ -188,6 +228,64 @@
 						}
 					}
 				]
+			}
+		},
+		"/api/kata": {
+			"get": {
+				"operationId": "GetKata",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Get all kata || Get kata by ID",
+				"tags": [
+					"KataController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "parametro opcional, id de kata a buscar",
+						"in": "query",
+						"name": "id",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateKata",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Create a new User",
+				"tags": [
+					"KataController"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
 			}
 		}
 	},

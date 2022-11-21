@@ -60,13 +60,14 @@ export class UserController implements IUserController {
      * @returns { userUpdateResponse }
      */
     @Put('/')
-    public async updateUse(@Body() userID: string, @Body() userData: any): Promise<any> {
+    public async updateUse(@Query() userID: string, @Body() userData: any): Promise<any> {
         let response: any
 
         if (userID) {
             LogSuccess(`[/api/user] Update User By ID: ${userID}`)
             await updateUserById(userID, userData).then(r => {
                 response = {
+                    status: 204,
                     message: `Update Successfully id: ${userID}`,
                     infoUpdate: r
                 }
@@ -74,6 +75,7 @@ export class UserController implements IUserController {
         } else {
             LogWarning(`[/api/user] Update user need ID`)
             response = {
+                status: 400,
                 message: "Pleas Provide an ID to update from databases"
             }
         }
@@ -94,6 +96,7 @@ export class UserController implements IUserController {
             LogSuccess(`[/api/user?id] Delete user by id: ${id}`)
             await deleteUserById(id).then(r => {
                 response = {
+                    status: 204,
                     message: `User with id ${id} deleted successfully`
                 }
             })
@@ -101,6 +104,7 @@ export class UserController implements IUserController {
         } else {
             LogWarning(`[/api/user] Delete user request Without ID`)
             response = {
+                status: 400,
                 message: `Provide an Id to remove from database`
             }
         }

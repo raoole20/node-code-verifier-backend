@@ -13,7 +13,7 @@ export class KataController implements IKataController{
      * @returns { kataResponse }
      */
     @Get('/')
-    async getKata(@Query()id?: string | undefined | null): Promise<any> {
+    async getKata(@Query()id?: string ): Promise<any> {
         let result:any
         if(id){
             await getKataById(id).then(response => {
