@@ -56,3 +56,12 @@ export const updateUserById = async (id: string, userData: any) : Promise<any>=>
         LogError(`[ORM ERROR]: Update User: ${error}`)
     }
 }
+
+
+// Login user 
+export const registeeUser = async ( user: any) : Promise<any | undefined> =>{
+  
+}
+
+
+// Register User

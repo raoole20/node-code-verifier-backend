@@ -14,6 +14,10 @@ export const userEntity = () => {
         age: { 
             type: Number, 
             required: true
+        },
+        password: { 
+            type: String,
+            requed: true
         }
     })
 

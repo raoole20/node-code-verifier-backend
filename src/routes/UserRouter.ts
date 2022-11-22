@@ -1,6 +1,9 @@
-import { UserController } from "../controllers/UserController"
 import express, { Request, Response } from "express"
+import bcrypt from 'bcrypt'
 import { LogInfo } from "../utils/logger"
+import { UserController } from "../controllers/UserController"
+import { IUser } from '../domain/interfaces/IUser.interface'
+import { AuthController } from "@/controllers/AuthController"
 
 let usersRouter = express.Router()
 
