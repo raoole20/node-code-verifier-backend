@@ -5,6 +5,7 @@ import { IUserController } from "./interfaces"
 import { createNewUser, deleteUserById, getAllUser, getUserById, updateUserById } from "../domain/orm/User.orm"
 import { LogError, LogSuccess, LogWarning } from "../utils/logger"
 import { BasicResponse } from "./types"
+import { IUser } from "@/domain/interfaces/IUser.interface"
 
 @Route("api/users")
 @Tags("UserControllers")
@@ -32,7 +33,7 @@ export class UserController implements IUserController {
 
     /**
      * Create a new User
-     * @param user datos del usuario
+     * @param { IUser } user datos del usuario
      * @return new user
      */
     @Post('/')
