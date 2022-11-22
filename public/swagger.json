@@ -17,6 +17,47 @@
 				],
 				"type": "object",
 				"description": "Basic JSON response for controllers"
+			},
+			"IUser": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"age": {
+						"type": "number",
+						"format": "double"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"age",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"IAuth": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": true
 			}
 		},
 		"securitySchemes": {}
@@ -286,6 +327,92 @@
 						}
 					}
 				}
+			}
+		},
+		"/api/auth/register": {
+			"post": {
+				"operationId": "RegisterUser",
+				"responses": {
+					"200": {
+						"description": ": 'statuscode', response }",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Register new User",
+				"tags": [
+					"AuthController"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "data for loggin user",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUser",
+								"description": "data for loggin user"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/auth/login": {
+			"post": {
+				"operationId": "LoginUser",
+				"responses": {
+					"200": {
+						"description": "return status del login",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Login user",
+				"tags": [
+					"AuthController"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "User data for login",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IAuth",
+								"description": "User data for login"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/auth/logout": {
+			"post": {
+				"operationId": "LogoutUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"AuthController"
+				],
+				"security": [],
+				"parameters": []
 			}
 		}
 	},

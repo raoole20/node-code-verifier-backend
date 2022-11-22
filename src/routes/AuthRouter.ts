@@ -39,9 +39,13 @@ authRouter.route('/auth/login')
             // Obtain the password in request and cypher
 
             // TODO use IAuth 
+            const authUser = {
+                email,
+                password
+            }
             
             const controller:AuthController = new AuthController()
-            const response: any = await controller.loginUser(email, password)
+            const response: any = await controller.loginUser(authUser)
 
             res.send(response)
         }

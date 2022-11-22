@@ -1,15 +1,20 @@
-import { Route, Post, Body, Tags } from "tsoa";
+import { Route, Post, Body, Tags, Query } from "tsoa";
 import { IUser } from "../domain/interfaces/IUser.interface";
 import { IAuthController } from "./interfaces";
 
 import { registerUser, LoginUser, Logiauth } from "../domain/orm/User.orm";
 import { LogSuccess, LogWarning } from "../utils/logger";
+import { IAuth } from "../domain/interfaces/IAuth.interface";
 
 @Route('/api/auth/')
 @Tags('AuthController')
-
 export class AuthController implements IAuthController{
 
+    /**
+     * Register new User
+     * @param { IUser } user data for loggin user
+     * @returns { status: 'statuscode', response }
+     */
     @Post('/register')
     async registerUser(@Body()user: IUser): Promise<any> {
         let response: any = ''
@@ -34,13 +39,19 @@ export class AuthController implements IAuthController{
         return response
     }
 
+
+    /**
+     * Login user
+     * @param { IAuth } authUser User data for login
+     * @returns return status del login
+     */
     @Post('/login')
-    async loginUser(email: string, password: string): Promise<any> {
+    async loginUser(@Body()authUser:IAuth): Promise<any> {
         let response: any = ''
 
-        if( email && password ){
-            await LoginUser(email, password).then( response =>{
-                LogSuccess(`[/api/auth/login] Login user ${email}`)
+        if( authUser.email && authUser.password ){
+            await LoginUser(authUser.email, authUser.password).then( response =>{
+                LogSuccess(`[/api/auth/login] Login user ${response.email}`)
                 response = {
                     status: 202,
                     message: `User logged successfully`
@@ -54,6 +65,7 @@ export class AuthController implements IAuthController{
             }
         }
        
+        return response 
     }
 
 

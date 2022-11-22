@@ -1,3 +1,4 @@
+import { IAuth } from '../../domain/interfaces/IAuth.interface'
 import { IUser } from '../../domain/interfaces/IUser.interface'
 import { BasicResponse } from '../types/index'
 
@@ -21,5 +22,5 @@ export interface IKataController{
 
 export interface IAuthController {
     registerUser(user: IUser): Promise<any>
-    loginUser(email: string, password: string): Promise<any>
+    loginUser(authUser: IAuth): Promise<any>
 }
