@@ -1,5 +1,8 @@
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import { userEntity } from "../entities/User.entity";
 import { LogError, LogSuccess } from "../../utils/logger";
+import { IUser } from "../interfaces/IUser.interface";
 
 
 /**
@@ -59,9 +62,63 @@ export const updateUserById = async (id: string, userData: any) : Promise<any>=>
 
 
 // Login user 
-export const registeeUser = async ( user: any) : Promise<any | undefined> =>{
-  
+export const registerUser = async ( user: IUser ) : Promise<any | undefined> =>{
+    try {
+        const userModel = userEntity()
+        return await userModel.create(user)
+    } catch (error) {
+        LogError(`[ORM ERROR]: Create User: ${error}`)
+    }
 }
 
 
 // Register User
+export const LoginUser = async ( email:string, password: string ) : Promise<any | undefined> =>{
+  try {
+    let user = userEntity()
+
+    //Find user by email
+    user.findOne({ email }, { id: 1, name: 1, email: 1 } , (err: any, user: IUser) => {
+        if(err) {
+            // TODO return error --> while found (500)
+            return 
+        }
+
+        if(!user){
+            //TODO return error --> user not fund (404)
+        }
+
+        // use brcypt to compare 
+        let validPassword = bcrypt.compareSync(password, user.password)
+
+        if(!validPassword){
+            // TODO --> (401)
+        }
+
+        // Create JWT
+        let token = jwt.sign({ 
+            email: user.email,
+            name: user.name
+        }, String(process.env.API_KEY) ,{
+            expiresIn: '1d'
+        })
+        
+
+        return {
+            token,
+            user
+        }
+    })
+
+
+    return await user.findOne({ email })
+  } catch (error) {
+    
+  }
+}
+
+
+// Register User
+export const Logiauth = async () : Promise<any | undefined> =>{
+  
+}

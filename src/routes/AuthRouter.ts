@@ -4,9 +4,9 @@ import { AuthController } from '../controllers/AuthController'
 import { IUser } from '../domain/interfaces/IUser.interface'
 
 
-const usersRouter = express.Router()
+const authRouter = express.Router()
 
-usersRouter.route('/auth/register')
+authRouter.route('/auth/register')
     .post( async (req: Request, res: Response) => {
 
         let { name, email, password, age } = req.body
@@ -30,7 +30,7 @@ usersRouter.route('/auth/register')
             res.send(response)
         }
     })
-usersRouter.route('/auth/login')
+authRouter.route('/auth/login')
     .post( async (req: Request, res: Response) => {
 
         let {  email, password} = req.body
@@ -48,4 +48,4 @@ usersRouter.route('/auth/login')
     })
 
 
-export default usersRouter
+export default authRouter
