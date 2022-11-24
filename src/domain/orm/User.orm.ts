@@ -3,17 +3,34 @@ import jwt from 'jsonwebtoken'
 import { userEntity } from "../entities/User.entity";
 import { LogError, LogSuccess } from "../../utils/logger";
 import { IUser } from "../interfaces/IUser.interface";
+import { UserResponse } from '../types';
 
 
 /**
  * Method to obtain all users from collection "User" in mongo server
  */
-export const getAllUser = async (): Promise<any[] | undefined> => {
+export const getAllUser = async (page: number, limit: number): Promise<any[] | undefined> => {
+    let response: any = {
+        users : [],
+        totalPages: 0,
+        currentPage : 0
+    }
     try {
         let userModel = userEntity()
 
-        // Search all users 
-        return await userModel.find({})
+        // Search all users ( using pagination )
+        response.users = await userModel.find({ isDeleted: false })
+            .limit(limit)
+            .skip((page - 1) * limit)
+            .exec()
+
+        // count all user 
+        const count = await userModel.countDocuments() 
+
+        response.totalPages = Math.ceil(count / limit) 
+        response.currentPage = page
+
+        return response
     } catch (error) {
         LogError('[ORM Error] Getting all users ' + error)
     }

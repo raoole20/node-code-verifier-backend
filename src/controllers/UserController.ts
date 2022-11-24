@@ -17,7 +17,7 @@ export class UserController implements IUserController {
      * @returns { userResponse } JSON info user
      */
     @Get('/')
-    async getUser(@Query() id?: string): Promise<any> {
+    async getUser(@Query()page: number, @Query()limit: number, @Query() id?: string): Promise<any> {
 
         if (id) {
             LogSuccess('[/api/users?id] Get user by id ' + id)
@@ -26,7 +26,7 @@ export class UserController implements IUserController {
         } else {
             LogSuccess('[/api/users] Get all users Request')
 
-            const response = await getAllUser()
+            const response = await getAllUser(page, limit)
             return response
         }
     }
