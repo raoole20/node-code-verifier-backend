@@ -98,7 +98,6 @@ export const LoginUser = async (email: string, password: string): Promise<any | 
 
         token = jwt.sign({
             email,
-            name
         }, String(apiKEY), {
             expiresIn: '2d'
         })
@@ -108,7 +107,7 @@ export const LoginUser = async (email: string, password: string): Promise<any | 
             token: token
         }
     } catch (error) {
-        LogError(`[ORM ERROR]: Creatin user: ${error}`)
+        LogError(`[ORM ERROR]: Login user: ${error}`)
     }
 }
 

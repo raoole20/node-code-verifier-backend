@@ -414,6 +414,37 @@
 				"security": [],
 				"parameters": []
 			}
+		},
+		"/api/auth/me": {
+			"get": {
+				"operationId": "UseData",
+				"responses": {
+					"200": {
+						"description": "all user o user found by id",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"description": "Enpoint to reatrive",
+				"tags": [
+					"AuthController"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "the user data",
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
 		}
 	},
 	"servers": [

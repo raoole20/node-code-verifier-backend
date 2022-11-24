@@ -48,26 +48,27 @@ export class AuthController implements IAuthController {
      */
     @Post('/login')
     async loginUser(@Body() authUser: IAuth): Promise<any> {
-        let response: AuthResponse | ErrorResponse | undefined
+        let respuesta: AuthResponse | ErrorResponse | any
 
         if (authUser.email && authUser.password) {
             await LoginUser(authUser.email, authUser.password).then(response => {
                 LogSuccess(`[/api/auth/login] Login user ${response.user.email}`)
-                response = {
+                respuesta = {
                     status: 202,
                     message: `User logged successfully`,
                     token: response.token,
+                    user: response.user
                 }
             })
         } else {
             LogWarning(`[/api/auth/login] Regiter needs email and password`)
-            response = {
+            respuesta = {
                 status: 404,
                 message: 'Data no provider'
             }
         }
 
-        return response
+        return respuesta
     }
 
 

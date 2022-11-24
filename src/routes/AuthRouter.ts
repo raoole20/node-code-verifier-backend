@@ -54,7 +54,10 @@ authRouter.route('/login')
             const controller:AuthController = new AuthController()
             const response: any = await controller.loginUser(authUser)
 
-            res.send(response)
+            res.send({
+                message: `Welcome ${response?.user?.name}`,
+                token: response?.token
+            })
         }else{
             return res.status(400).send({
                 message: '[ERROR user data missing]: Data is Requered'
