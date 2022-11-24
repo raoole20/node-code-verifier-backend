@@ -12,3 +12,14 @@ export type ErrorResponse = {
     error: string, 
     message: string
 }
+
+
+/**
+ * Basic login response
+ */
+
+export type AuthResponse = {
+    status: number,
+    message: string,
+    token?: string
+}
