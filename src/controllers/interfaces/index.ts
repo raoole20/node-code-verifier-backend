@@ -14,7 +14,7 @@ export interface IUserController{
 }
 
 export interface IKataController{
-    getKata(id?:string):   Promise<any>
+    getKata(page: number, limit: number, id?:string):   Promise<any>
     deleteKata(id:string): Promise<any>
     createKata(user: any): Promise<any>
     updateKata(userID: string, userData: any): Promise<any>

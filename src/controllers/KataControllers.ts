@@ -10,10 +10,12 @@ export class KataController implements IKataController{
     /**
      * Get all kata || Get kata by ID
      * @param { string } id parametro opcional, id de kata a buscar
+     * @param { number } page 
+     * @param { limit } limit 
      * @returns { kataResponse }
      */
     @Get('/')
-    async getKata(@Query()id?: string ): Promise<any> {
+    async getKata(@Query()page: number, @Query()limit: number, @Query()id?: string ): Promise<any> {
         let result:any
         if(id){
             await getKataById(id).then(response => {
@@ -23,7 +25,7 @@ export class KataController implements IKataController{
                 LogError(`[/api/kata] Error get User by id`)
             })
         }else{
-            await getAllKata().then( res => {
+            await getAllKata(page, limit).then( res => {
                 LogSuccess(`[api/kata] Get All User successfully`)
                 result = res
             }).catch( e => {

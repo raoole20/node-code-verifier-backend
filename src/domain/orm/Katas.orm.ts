@@ -3,12 +3,31 @@ import { kataEntity } from "../entities/Katas.entity";
 
 
 // Get 
-export const getAllKata = async () :Promise<any> => {
-    try{
-        const katas = kataEntity()
-        return await katas.find()
-    }catch(error){
-        LogError(`[ORM ERROR] Get all Katas error: ${error}`)
+export const getAllKata = async (page: number, limit: number) :Promise<any> => {
+    let response: any = {
+        kata : [],
+        totalPages: 0,
+        currentPage : 0
+    }
+    try {
+        let userModel = kataEntity()
+
+        // Search all users ( using pagination )
+        response.kata = await userModel.find({ isDeleted: false })
+            .select({ password: 0 })
+            .limit(limit)
+            .skip((page - 1) * limit)
+            .exec()
+
+        // count all user 
+        const count = await userModel.countDocuments() 
+
+        response.totalPages = Math.ceil(count / limit) 
+        response.currentPage = page
+
+        return response
+    } catch (error) {
+        LogError('[ORM Error] Getting all Kata ' + error)
     }
 }
 
