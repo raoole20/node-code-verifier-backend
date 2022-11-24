@@ -20,6 +20,7 @@ export const getAllUser = async (page: number, limit: number): Promise<any[] | u
 
         // Search all users ( using pagination )
         response.users = await userModel.find({ isDeleted: false })
+            .select({ password: 0 })
             .limit(limit)
             .skip((page - 1) * limit)
             .exec()

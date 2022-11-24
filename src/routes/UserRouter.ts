@@ -11,9 +11,13 @@ usersRouter.route('/')
     //Get:
     .get(async (req: Request, res: Response) => {
         const id:any = req?.query?.id
+
+        let page: any = req.query?.page || 1
+        let limit: any = req?.query?.limit || 10
+
         const controllers: UserController = new UserController()
 
-        const response: any = await controllers.getUser(id)
+        const response: any = await controllers.getUser(page, limit, id)
 
         return res.status(202).send(response)
     })
