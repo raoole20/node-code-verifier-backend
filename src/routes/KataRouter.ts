@@ -1,16 +1,17 @@
 import { LogInfo } from "../utils/logger";
 import express, { Express, Request, Response, Router } from "express";
 import { KataController } from "../controllers/KataControllers";
+import { verifyToken } from "../middleware/verifyToken";
 
 
 const kataRouter = Router()
 
-kataRouter.get('/', async (req: Request, res: Response) => {
+kataRouter.get('/', verifyToken , async (req: Request, res: Response) => {
     let  id: any  | string  = req?.query?.id
-    LogInfo(`Query id: ${id}`)
+    let { page = 1, limit = 10 } = req.query
 
     const controller:KataController = new KataController()
-    const response = await controller.getKata(id)
+    const response = await controller.getKata( Number(page), Number(limit), id)
     
     res.status(200).json(response)
 })

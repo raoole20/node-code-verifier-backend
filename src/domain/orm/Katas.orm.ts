@@ -14,7 +14,6 @@ export const getAllKata = async (page: number, limit: number) :Promise<any> => {
 
         // Search all users ( using pagination )
         response.kata = await userModel.find({ isDeleted: false })
-            .select({ password: 0 })
             .limit(limit)
             .skip((page - 1) * limit)
             .exec()
